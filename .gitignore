@@ -11,3 +11,4 @@ node_modules/
 # Documentation markdown files
 *.md
 **/*.md
+frontend/.git.frontend-backup/
