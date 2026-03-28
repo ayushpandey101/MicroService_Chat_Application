@@ -178,13 +178,22 @@ const ChatSidebar = ({
               const unseenCount = chat.chat.unseenCount || 0;
 
               return (
-                <button
+                <div
                   key={chat.chat._id}
+                  role="button"
+                  tabIndex={0}
                   onClick={() => {
                     setSelectedUser(chat.chat._id);
                     setSidebarOpen(false);
                   }}
-                  className={`w-full text-left p-4 rounded-lg transition-colors ${isSelected ? "bg-sky-600/30 border border-sky-500" : "border border-slate-700 hover:border-slate-500 hover:bg-slate-800/40"}`}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setSelectedUser(chat.chat._id);
+                      setSidebarOpen(false);
+                    }
+                  }}
+                  className={`w-full text-left p-4 rounded-lg transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-400/60 ${isSelected ? "bg-sky-600/30 border border-sky-500" : "border border-slate-700 hover:border-slate-500 hover:bg-slate-800/40"}`}
                 >
                   <div className="flex items-center gap-3">
                     <div className="relative">
@@ -251,7 +260,7 @@ const ChatSidebar = ({
                       )}
                     </div>
                   </div>
-                </button>
+                </div>
               );
             })}
 
